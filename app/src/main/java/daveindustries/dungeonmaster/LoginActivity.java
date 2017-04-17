@@ -102,7 +102,7 @@ public class LoginActivity extends AppCompatActivity {
         };
     }
 
-    /* Attach the listener to your FirebaseAuth instance in the onStart() method and remove it on         onStop() */
+    /* Attach the listener to your FirebaseAuth instance in the onStart() method and remove it on onStop() */
 
     @Override
     public void onStart() {
@@ -120,7 +120,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-    /*Create a new createAccount method which takes in an email address and password, validates         them and then creates a new user with the createUserWithEmailAndPassword method.*/
+    /*Create a new createAccount method which takes in an email address and password, validates them and then creates a new user with the createUserWithEmailAndPassword method.*/
 
     private void createAccount(String email, String password) {
         Log.d(TAG, "createAccount:" + email);
@@ -153,7 +153,7 @@ public class LoginActivity extends AppCompatActivity {
         // [END create_user_with_email]
     }
 
-    /* Create a new signIn method which takes in an email address and password, validates them,         and then signs a user in with the signInWithEmailAndPassword method.*/
+    /* Create a new signIn method which takes in an email address and password, validates them, and then signs a user in with the signInWithEmailAndPassword method.*/
 
     private void signIn(String email, String password) {
         Log.d(TAG, "signIn:" + email);
