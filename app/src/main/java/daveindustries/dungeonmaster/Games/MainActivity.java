@@ -1,11 +1,14 @@
 package daveindustries.dungeonmaster.Games;
 
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import daveindustries.dungeonmaster.R;
 
-public class MainActivity extends AppCompatActivity implements GamesListFragment.GamesListListener {
+public class MainActivity extends AppCompatActivity implements GamesListFragment.GamesListListener, GamesDetailFragment.GamesDetailListener {
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -13,14 +16,28 @@ public class MainActivity extends AppCompatActivity implements GamesListFragment
         setContentView(R.layout.activity_main);
 
     //    CreateTestData();
+
     }
 
 
 
+    @Override
+    public void GamesDetail(Uri uri) {
+
+    }
 
     @Override
     public void onGameSelected(Game game) {
+        GamesDetailFragment fragment = (GamesDetailFragment) getSupportFragmentManager().findFragmentById(R.id.detailsFrag);
+        Bundle bundle = new Bundle();
 
+        bundle.putSerializable("game", game);
+
+        fragment.setArguments(bundle);
+    }
+
+    public interface GamesLandingListener {
+        void getData(Game game);
     }
 
     public void CreateTestData() {
@@ -59,4 +76,5 @@ public class MainActivity extends AppCompatActivity implements GamesListFragment
         DatabaseAccess.CreateGame(game4);
 
     }
+
 }

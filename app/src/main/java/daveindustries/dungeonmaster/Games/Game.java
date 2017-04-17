@@ -13,20 +13,33 @@ public class Game implements Serializable {
     private String name;
     private String dmRef;
     private String dbRef;
+    private String location;
     private ArrayList<Player> charList = new ArrayList<>();
+    private boolean isLFP;
 
     /** Setters **/
     public void setName(String name) {
         this.name = name;
     }
+
     public void setDmRef(String dmRef) {
         this.dmRef = dmRef;
     }
+
     public void setDbRef(String dbRef) {
         this.dbRef = dbRef;
     }
+
     public void setCharList(ArrayList<Player> players) {
         this.charList = players;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public void setLFP(boolean lfp) {
+        this.isLFP = lfp;
     }
 
     /** Getters **/
@@ -46,7 +59,13 @@ public class Game implements Serializable {
         return charList;
     }
 
+    public String getLocation() {
+        return location;
+    }
 
+    public boolean isLFP() {
+        return isLFP;
+    }
 
 
     /** Constructors **/

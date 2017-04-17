@@ -4,11 +4,14 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.ListFragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,13 +24,13 @@ import daveindustries.dungeonmaster.R;
  * {@link GamesListListener} interface
  * to handle interaction events.
  */
-public class GamesListFragment extends Fragment implements DatabaseAccess.DatabaseListener {
+public class GamesListFragment extends Fragment implements DatabaseAccess.DatabaseListener, GamesListAdapter.AdapterListener {
 
     private GamesListAdapter adapter;
     private List<Game> mGamesList;
     private View view;
-    private RecyclerView recycler;
-
+    private RecyclerView mRecyclerView;
+    private RecyclerView.LayoutManager mLayoutManager;
     private GamesListListener mListener;
 
     public GamesListFragment() {
@@ -39,10 +42,12 @@ public class GamesListFragment extends Fragment implements DatabaseAccess.Databa
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_games_list, container, false);
-        recycler = (RecyclerView) view.findViewById(R.id.list);
 
-        recycler.setLayoutManager(new LinearLayoutManager(getContext()));
+        view = inflater.inflate(R.layout.fragment_games_list, container, false);
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.list);
+
+        mLayoutManager = new LinearLayoutManager(this.getActivity());
+        mRecyclerView.setLayoutManager(mLayoutManager);
         DatabaseAccess.getGames(this);
         return view;
     }
@@ -53,6 +58,8 @@ public class GamesListFragment extends Fragment implements DatabaseAccess.Databa
      //       mListener.onGameSelected(game);
         }
     }
+
+
 
     @Override
     public void onAttach(Context context) {
@@ -74,8 +81,15 @@ public class GamesListFragment extends Fragment implements DatabaseAccess.Databa
     @Override
     public void receiveData(Object data) {
         mGamesList = (ArrayList<Game>) data;
-        adapter = new GamesListAdapter(mGamesList, mListener);
-        recycler.setAdapter(adapter);
+        adapter = new GamesListAdapter(mGamesList, this);
+        mRecyclerView.setAdapter(adapter);
+    }
+
+
+    @Override
+    public void selectedGame(Game game) {
+        Log.d("GamesListFragment", game.getName());
+        mListener.onGameSelected(game);
     }
 
     /**
@@ -89,7 +103,6 @@ public class GamesListFragment extends Fragment implements DatabaseAccess.Databa
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface GamesListListener {
-        // TODO: Update argument type and name
         void onGameSelected(Game game);
     }
 }

@@ -14,4 +14,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:layout="@layout/fragment_games_list" />
+
+    <fragment
+        android:id="@+id/detailsFrag"
+        android:name="daveindustries.dungeonmaster.Games.GamesDetailFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:layout="@layout/fragment_games_detail" />
 </LinearLayout>

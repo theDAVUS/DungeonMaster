@@ -1,5 +1,6 @@
 package daveindustries.dungeonmaster.Games;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,13 +22,14 @@ import daveindustries.dungeonmaster.R;
 public class GamesListAdapter extends RecyclerView.Adapter<GamesListAdapter.ViewHolder>  {
 
     private List<Game> mGamesList = new ArrayList<>();
-    private GamesListFragment.GamesListListener mListener;
+
+    private AdapterListener mAdapterListener;
     private Game game;
 
 
-    public GamesListAdapter(List<Game> myGamesList, GamesListFragment.GamesListListener myListener) {
+    public GamesListAdapter(List<Game> myGamesList, AdapterListener listener) {
         mGamesList = myGamesList;
-        mListener = myListener;
+        mAdapterListener = listener;
     }
 
 
@@ -59,18 +61,21 @@ public class GamesListAdapter extends RecyclerView.Adapter<GamesListAdapter.View
         return vh;
     }
 
+
+
     @Override
     public void onBindViewHolder(GamesListAdapter.ViewHolder holder, int position) {
-        game = mGamesList.get(position);
+        final Game game = mGamesList.get(position);
 
         holder.tvGameName.setText(mGamesList.get(position).getName());
-  /*      holder.itemView.setOnClickListener(new View.OnClickListener() {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("onClick", "GamesListAdapter");
-                mListener.getGame(game);
+                Log.d("onClick", "GamesListAdapter "+game.getName());
+                mAdapterListener.selectedGame(game);
+               // mListener.onGameSelected(game);
             }
-        });*/
+        });
     }
 
     @Override
@@ -82,4 +87,9 @@ public class GamesListAdapter extends RecyclerView.Adapter<GamesListAdapter.View
             return 0;
         }
     }
+    public interface AdapterListener {
+        void selectedGame(Game game);
+    }
+
+
 }
