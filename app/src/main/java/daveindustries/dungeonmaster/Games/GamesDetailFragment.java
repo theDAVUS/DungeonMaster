@@ -83,9 +83,10 @@ public class GamesDetailFragment extends Fragment  {
         if (game.isLFP()) {
             tvLFP.setText(R.string.isLFP);
             btJoinGame.setClickable(true);
+            btJoinGame.setVisibility(View.VISIBLE);
         } else {
             tvLFP.setText(R.string.isNotLFP);
-            btJoinGame.setClickable(false);
+            btJoinGame.setVisibility(View.GONE);
         }
     }
 

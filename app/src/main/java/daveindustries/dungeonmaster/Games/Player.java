@@ -1,10 +1,12 @@
 package daveindustries.dungeonmaster.Games;
 
+
+
 /**
  * Created by daver on 4/17/2017.
  */
 
-public class Player {
+public class Player  {
 
     private String name;
 
@@ -18,7 +20,8 @@ public class Player {
     public Player() {
 
     }
-    public Player(String name) {
 
+    public Player(String name) {
+        this.name = name;
     }
 }

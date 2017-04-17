@@ -30,7 +30,6 @@ public class DatabaseAccess {
 
         thisGamesRef = mGamesRef.push();
         game.setDbRef(thisGamesRef.getKey());
-
         thisGamesRef.setValue(game);
 
     }
@@ -51,6 +50,7 @@ public class DatabaseAccess {
 
                 game.setName(dataSnapshot.child("name").getValue().toString());
                 game.setDbRef(dataSnapshot.child("dbRef").getValue().toString());
+                game.setLFP(Boolean.parseBoolean(dataSnapshot.child("lfp").getValue().toString()));
                 //    game.setDmRef(messageSnapshot.child("dmRef").getValue().toString());
                 Log.d("getGamesFromDB", "bueno");
                 gamesList.add(game);
