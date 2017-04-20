@@ -2,8 +2,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="daveindustries.dungeonmaster.Games.CreateGameFragment"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="10dp"
+    tools:context="daveindustries.dungeonmaster.Games.CreateGameFragment">
 
 
     <EditText
@@ -19,6 +20,55 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Looking for Players" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/spDay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <EditText
+            android:id="@+id/etTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="Time"
+            android:inputType="time" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvNumPlayers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            tools:text="@string/numberOfPlayers" />
+
+        <EditText
+            android:id="@+id/etNumPlayers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="2"
+            android:inputType="number" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/etAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Location"
+        android:inputType="textPostalAddress" />
 
     <Button
         android:id="@+id/btCreateGame"

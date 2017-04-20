@@ -1,5 +1,8 @@
 package daveindustries.dungeonmaster.Games;
 
+import android.location.Address;
+import android.location.Location;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +16,9 @@ public class Game implements Serializable {
     private String name;
     private String dmRef;
     private String dbRef;
-    private String location;
+    private double latitude;
+    private double longitude;
+    private String playTime;
     private List<Player> charList = new ArrayList<>();
     private boolean isLFP = false;
 
@@ -34,8 +39,15 @@ public class Game implements Serializable {
         this.charList = players;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setLatitude(double location) {
+        this.latitude = location;
+    }
+    public void setLongitude(double location) {
+        this.longitude = location;
+    }
+
+    public void setPlayTime(String playTime) {
+        this.playTime = playTime;
     }
 
     public void setLFP(boolean lfp) {
@@ -59,8 +71,15 @@ public class Game implements Serializable {
         return charList;
     }
 
-    public String getLocation() {
-        return location;
+    public double getLatitude() {
+        return latitude;
+    }
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public String getPlayTime() {
+        return playTime;
     }
 
     public boolean isLFP() {
@@ -76,6 +95,7 @@ public class Game implements Serializable {
     public Game(String name) {
         this.name = name;
     }
+
     public Game(String name, boolean isLFP) {
         this.name = name;
         this.isLFP = isLFP;

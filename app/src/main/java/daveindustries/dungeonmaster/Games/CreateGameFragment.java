@@ -1,15 +1,24 @@
 package daveindustries.dungeonmaster.Games;
 
 import android.content.Context;
+import android.location.Address;
+import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.Toast;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import daveindustries.dungeonmaster.R;
 
@@ -26,6 +35,11 @@ public class CreateGameFragment extends Fragment {
     private EditText etGameName;
     private CheckBox cbLFP;
     private Button btCreateGame;
+    private Spinner spDay;
+    private EditText etTime;
+    private EditText etAddress;
+    private Address address;
+
 
     public CreateGameFragment() {
         // Required empty public constructor
@@ -38,17 +52,52 @@ public class CreateGameFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_create_game, container, false);
 
+
         etGameName = (EditText) view.findViewById(R.id.etGameName);
         cbLFP = (CheckBox) view.findViewById(R.id.cbLFP);
+        etTime = (EditText) view.findViewById(R.id.etTime);
         btCreateGame = (Button) view.findViewById(R.id.btCreateGame);
+        etAddress = (EditText) view.findViewById(R.id.etAddress);
+
+        /*Day Spinner*/
+        spDay = (Spinner) view.findViewById(R.id.spDay);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.daysOfWeek, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spDay.setAdapter(adapter);
+
+        /*CreateGame OnClick*/
         btCreateGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+            // TODO: validate form to avoid exceptions
                 Game game = new Game(etGameName.getText().toString(), cbLFP.isChecked());
+                game.setPlayTime(spDay.getSelectedItem().toString()+" "+etTime.getText().toString());
+                try {
+                   Address addr = geoLocate(etAddress.getText().toString());
+                    game.setLatitude(addr.getLatitude());
+                    game.setLongitude(addr.getLongitude());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 DatabaseAccess.CreateGame(game);
             }
         });
+
+
         return view;
+    }
+
+
+    public Address geoLocate(String location) throws IOException {
+        List<Address> addresses;
+        Geocoder geocoder = new Geocoder(view.getContext());
+        try {
+            addresses = geocoder.getFromLocationName(location, 1);
+            return addresses.get(0);
+        } catch(IOException e) {
+            Toast.makeText(view.getContext(), "Invalid Location", Toast.LENGTH_SHORT).show();
+        }
+        return null;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

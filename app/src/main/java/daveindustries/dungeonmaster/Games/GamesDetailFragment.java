@@ -78,7 +78,7 @@ public class GamesDetailFragment extends Fragment  {
 
         tvGameName.setText(game.getName());
 
-        tvGameLocation.setText(game.getLocation());
+        //tvGameLocation.setText(game.getLocation());
 
         if (game.isLFP()) {
             tvLFP.setText(R.string.isLFP);
@@ -89,8 +89,6 @@ public class GamesDetailFragment extends Fragment  {
             btJoinGame.setVisibility(View.GONE);
         }
     }
-
-
 
     /**
      * This interface must be implemented by activities that contain this

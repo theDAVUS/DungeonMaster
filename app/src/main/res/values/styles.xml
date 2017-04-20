@@ -8,7 +8,16 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-<!--   <style name="Button_Disabled">
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <!--   <style name="Button_Disabled">
        <item name="backgroundTint">@android:color/darker_gray"</item>
        <item name="android:textColor">@color/common_google_signin_btn_text_dark_disabled"</item>
        <item name="android:clickable">false</item>

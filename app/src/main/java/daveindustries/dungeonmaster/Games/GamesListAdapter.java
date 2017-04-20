@@ -1,6 +1,8 @@
 package daveindustries.dungeonmaster.Games;
 
 import android.content.Context;
+import android.location.Geocoder;
+import android.location.Location;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,8 +12,12 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import daveindustries.dungeonmaster.R;
 
@@ -20,6 +26,7 @@ import daveindustries.dungeonmaster.R;
  */
 
 public class GamesListAdapter extends RecyclerView.Adapter<GamesListAdapter.ViewHolder>  {
+
 
     private List<Game> mGamesList = new ArrayList<>();
 
@@ -34,6 +41,7 @@ public class GamesListAdapter extends RecyclerView.Adapter<GamesListAdapter.View
 
 
 
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
         public TextView tvGameName;
@@ -45,6 +53,7 @@ public class GamesListAdapter extends RecyclerView.Adapter<GamesListAdapter.View
 
         public ViewHolder(View itemView) {
             super(itemView);
+
             tvGameName = (TextView) itemView.findViewById(R.id.tvGameName);
             tvGameLocation = (TextView) itemView.findViewById(R.id.tvLocation);
             tvLFP = (TextView) itemView.findViewById(R.id.tvLFP);
@@ -63,11 +72,16 @@ public class GamesListAdapter extends RecyclerView.Adapter<GamesListAdapter.View
 
 
 
+    @SuppressWarnings("MissingPermission")
     @Override
     public void onBindViewHolder(GamesListAdapter.ViewHolder holder, int position) {
         final Game game = mGamesList.get(position);
+        Location gameLocation = new Location("");
+        gameLocation.setLongitude(game.getLongitude());
+        gameLocation.setLatitude(game.getLatitude());
 
         holder.tvGameName.setText(mGamesList.get(position).getName());
+        holder.tvGameLocation.setText(""/*+mLocation.distanceTo(gameLocation)*/);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
