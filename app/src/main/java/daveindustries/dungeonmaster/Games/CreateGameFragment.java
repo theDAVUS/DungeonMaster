@@ -79,6 +79,23 @@ public class CreateGameFragment extends Fragment {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+                Player player1 = new Player("Dave");
+                player1.setPlayerClass("Rogue");
+                player1.setPlayerLevel("3");
+                Player player2 = new Player("Steve");
+                player2.setPlayerClass("Berzerker");
+                player2.setPlayerLevel("6");
+                Player player3 = new Player("Frank");
+                player3.setPlayerClass("Wizard");
+                player3.setPlayerLevel("4");
+                Player player4 = new Player("Chino");
+                player4.setPlayerClass("Loser");
+                player4.setPlayerLevel("12");
+
+                game.addToCharList(player1);
+                game.addToCharList(player2);
+                game.addToCharList(player3);
+                game.addToCharList(player4);
                 DatabaseAccess.CreateGame(game);
             }
         });

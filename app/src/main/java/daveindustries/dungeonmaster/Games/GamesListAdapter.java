@@ -44,11 +44,11 @@ public class GamesListAdapter extends RecyclerView.Adapter<GamesListAdapter.View
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
-        public TextView tvGameName;
-        public TextView tvGameLocation;
-        public TextView tvLFP;
-        public TextView tvNumPlayers;
-        public RelativeLayout rlGameItem;
+        private TextView tvGameName;
+        private TextView tvGameLocation;
+        private TextView tvLFP;
+        private TextView tvNumPlayers;
+        private RelativeLayout rlGameItem;
 
 
         public ViewHolder(View itemView) {

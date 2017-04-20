@@ -39,8 +39,10 @@ public class DatabaseAccess {
     private static MessageListener messageListener;
 
     private static DatabaseListener mListener;
+    private static InGameListener mInGameListener;
 
-    private static Queue<ChatMessage> queue = new LinkedList<>();
+
+
 
     public static String getmUid() {
         return mUid;
@@ -90,7 +92,7 @@ public class DatabaseAccess {
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
               /*  for(DataSnapshot messageSnapshot : dataSnapshot.getChildren()) {
                     Game game = new Game();
-                    game.setName(messageSnapshot.child("name").getValue().toString());
+                    game.setPlayerName(messageSnapshot.child("name").getValue().toString());
                     game.setDbRef(messageSnapshot.child("dbRef").getValue().toString());
                     //    game.setDmRef(messageSnapshot.child("dmRef").getValue().toString());
                     Log.d("getGamesFromDB", "bueno" );
@@ -116,10 +118,39 @@ public class DatabaseAccess {
         });
     }
 
+
+
     public interface DatabaseListener {
         void receiveData(Object data);
     }
 
+    public static void GetInGameChars(String dbRef, InGameListener listener) {
+        mInGameListener = listener;
+
+        thisGamesRef = mGamesRef.child(dbRef);
+        thisGamesRef.child("charList").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                List<Player> players = new ArrayList();
+                for(DataSnapshot messageSnapshot : dataSnapshot.getChildren()) {
+
+                    Player player = messageSnapshot.getValue(Player.class);
+                    players.add(player);
+                }
+                mInGameListener.receiveGame(players);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+    public interface InGameListener {
+        void receiveGame(List<Player> players);
+    }
 
     public static void SendMessage(ChatMessage mMessage) {
         mRootRef.child("users").child(mMessage.getSendTo()).child("messages").child(mUid).setValue(mMessage.getMessage());

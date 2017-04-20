@@ -21,7 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import daveindustries.dungeonmaster.Games.DatabaseAccess;
-import daveindustries.dungeonmaster.Games.MainActivity;
+import daveindustries.dungeonmaster.Games.Activity_FindGame;
 import daveindustries.dungeonmaster.R;
 
 public class LoginActivity extends AppCompatActivity {
@@ -221,7 +221,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void goToMainActivity() {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, Activity_FindGame.class);
         startActivity(intent);
     }
 

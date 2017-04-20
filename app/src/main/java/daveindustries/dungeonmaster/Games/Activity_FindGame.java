@@ -1,35 +1,32 @@
 package daveindustries.dungeonmaster.Games;
 
 import android.net.Uri;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 
 
 import daveindustries.dungeonmaster.Games.Messaging.MessagingFragment;
 import daveindustries.dungeonmaster.R;
 
-public class MainActivity extends AppCompatActivity implements GamesListFragment.GamesListListener,
+public class Activity_FindGame extends AppCompatActivity implements GamesListFragment.GamesListListener,
         GamesDetailFragment.GamesDetailListener, CreateGameFragment.CreateGameInterface, DatabaseAccess.MessageListener {
 
 
-    FragmentManager fragmentManager = getSupportFragmentManager();
-    Button btCreateGame;
+    private FragmentManager fragmentManager = getSupportFragmentManager();
+    private Button btCreateGame;
 
-    GamesDetailFragment detailsFrag = new GamesDetailFragment();
-    MessagingFragment messageFragment = new MessagingFragment();;
+    private GamesDetailFragment detailsFrag = new GamesDetailFragment();
+    private MessagingFragment messageFragment = new MessagingFragment();;
 
-    FrameLayout messageView;
+    private FrameLayout messageView;
 
     private Toolbar mToolbar;
 
@@ -61,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements GamesListFragment
         }
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.toolbar_layout, menu);
@@ -70,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements GamesListFragment
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_find_game);
 
         mToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(mToolbar);

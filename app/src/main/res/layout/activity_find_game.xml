@@ -9,7 +9,7 @@
     android:addStatesFromChildren="false"
     android:orientation="vertical"
 
-    tools:context="daveindustries.dungeonmaster.Games.MainActivity">
+    tools:context="daveindustries.dungeonmaster.Games.Activity_FindGame">
 
 
     <RelativeLayout
@@ -48,11 +48,9 @@
             <LinearLayout
                 android:id="@+id/fragView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="0dp"
                 android:layout_weight="1"
-                android:orientation="vertical">
-
-            </LinearLayout>
+                android:orientation="vertical" />
 
             <Button
                 android:id="@+id/btStartCreate"

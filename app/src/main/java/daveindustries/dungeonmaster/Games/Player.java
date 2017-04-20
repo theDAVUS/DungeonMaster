@@ -8,13 +8,29 @@ package daveindustries.dungeonmaster.Games;
 
 public class Player  {
 
-    private String name;
+    private String playerName;
+    private String playerLevel;
+    private String playerClass;
 
-    public String getName(){
-        return name;
+    public String getPlayerName(){
+        return playerName;
     }
-    public void setName(String name) {
-        this.name = name;
+
+    public String getPlayerLevel() {
+        return playerLevel;
+    }
+    public String getPlayerClass() {
+        return playerClass;
+    }
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
+    }
+
+    public void setPlayerLevel(String playerLevel) {
+        this.playerLevel = playerLevel;
+    }
+    public void setPlayerClass(String playerClass) {
+        this.playerClass = playerClass;
     }
 
     public Player() {
@@ -22,6 +38,6 @@ public class Player  {
     }
 
     public Player(String name) {
-        this.name = name;
+        this.playerName = name;
     }
 }
